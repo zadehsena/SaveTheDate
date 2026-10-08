@@ -266,6 +266,12 @@ h2 {
 }
 
 @media (max-width: 760px) {
+  .save-date-link {
+    min-height: 36px;
+    padding: 7px 13px;
+    font-size: 14px;
+  }
+
   .entry-layout {
     display: flex;
     flex-direction: column;
