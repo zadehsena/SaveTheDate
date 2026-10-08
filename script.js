@@ -1,8 +1,41 @@
 const form = document.querySelector('#reply-form');
 const inviteesList = document.querySelector('#invitees-list');
+const phoneInput = document.querySelector('#guest-phone');
 document.querySelector('#submission-id').value = globalThis.crypto?.randomUUID?.()
   || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 let nextInviteeId = 0;
+
+function formatPhoneNumber(value) {
+  const digits = value.replace(/\D/g, '');
+  const hasUsPrefix = value.trimStart().startsWith('+1') || (digits.length === 11 && digits.startsWith('1'));
+
+  // Preserve international numbers that do not use the US country code.
+  if ((value.trimStart().startsWith('+') && !hasUsPrefix) || digits.length > 11 ||
+      (digits.length === 11 && !hasUsPrefix)) return value;
+
+  const national = hasUsPrefix ? digits.slice(1) : digits;
+  const prefix = hasUsPrefix ? '+1 ' : '';
+  if (national.length <= 3) return prefix + national;
+  if (national.length <= 6) return `${prefix}(${national.slice(0, 3)}) ${national.slice(3)}`;
+  return `${prefix}(${national.slice(0, 3)}) ${national.slice(3, 6)}-${national.slice(6)}`;
+}
+
+phoneInput.addEventListener('input', () => {
+  const digitsBeforeCaret = phoneInput.value.slice(0, phoneInput.selectionStart ?? phoneInput.value.length)
+    .replace(/\D/g, '').length;
+  const formatted = formatPhoneNumber(phoneInput.value);
+  if (formatted === phoneInput.value) return;
+
+  phoneInput.value = formatted;
+  let caret = 0;
+  let digitsSeen = 0;
+  while (caret < formatted.length && digitsSeen < digitsBeforeCaret) {
+    if (/\d/.test(formatted[caret])) digitsSeen += 1;
+    caret += 1;
+  }
+  if (digitsBeforeCaret === 0 && formatted.startsWith('+1 ')) caret = 3;
+  phoneInput.setSelectionRange(caret, caret);
+});
 
 // Midnight at the start of October 8 in Temecula (Pacific Daylight Time).
 const weddingStart = new Date('2027-10-08T00:00:00-07:00').getTime();

@@ -372,8 +372,10 @@ input {
   outline-offset: 3px;
 }
 
-.email-field,
-.phone-field {
+.contact-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
   margin-bottom: 27px;
 }
 
@@ -579,6 +581,22 @@ input {
   .name-fields {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
+  }
+
+  .contact-fields {
+    gap: 8px;
+  }
+
+  .contact-fields .form-field > label {
+    font-size: 12px;
+    letter-spacing: .08em;
+    white-space: nowrap;
+  }
+
+  .contact-fields .form-field input[type='email'],
+  .contact-fields .form-field input[type='tel'] {
+    padding-inline: 8px;
+    font-size: 16px;
   }
 
   .invitee-name-fields {
