@@ -4,10 +4,10 @@ const SHEET_ID = '1gyI8Cokz-22O79HwzPnSdsxaZTyPcJtrXIvKXo9k5hA';
 const TAB_NAME = 'Responses';
 const HEADERS = [
   'Submitted at', 'First name', 'Last name', 'Additional invitees',
-  'Email', 'Street address', 'Unit', 'City', 'State', 'ZIP code', 'Submission ID', 'Phone number'
+  'Email', 'Phone number', 'Street address', 'Unit', 'City', 'State', 'ZIP code', 'Submission ID'
 ];
-const SUBMISSION_ID_COLUMN = 11;
-const PHONE_COLUMN = 12;
+const PHONE_COLUMN = 6;
+const SUBMISSION_ID_COLUMN = 12;
 
 function doGet() {
   return page('Invitation details', 'Please use the form on Neusha and Jacob\'s website.');
@@ -57,15 +57,7 @@ function doPost(e) {
     try {
       const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
       const sheet = spreadsheet.getSheetByName(TAB_NAME) || spreadsheet.insertSheet(TAB_NAME);
-      if (sheet.getLastRow() === 0) sheet.appendRow(HEADERS);
-      else {
-        if (!sheet.getRange(1, SUBMISSION_ID_COLUMN).getValue()) {
-          sheet.getRange(1, SUBMISSION_ID_COLUMN).setValue('Submission ID');
-        }
-        if (!sheet.getRange(1, PHONE_COLUMN).getValue()) {
-          sheet.getRange(1, PHONE_COLUMN).setValue('Phone number');
-        }
-      }
+      ensureColumns(sheet);
 
       const lastRow = sheet.getLastRow();
       if (lastRow > 1 && sheet.getRange(2, SUBMISSION_ID_COLUMN, lastRow - 1, 1)
@@ -75,7 +67,7 @@ function doPost(e) {
 
       sheet.appendRow([
         new Date(), firstName, lastName, invitees.join('; '),
-        email, street, unit, city, state, zip, submissionId, phone
+        email, phone, street, unit, city, state, zip, submissionId
       ].map((cell, index) => index === 0 ? cell : safeCell(cell)));
       SpreadsheetApp.flush();
     } finally {
@@ -87,6 +79,37 @@ function doPost(e) {
     console.error(error);
     return page('Unable to send', 'Your details were not saved. Please go back and try again.');
   }
+}
+
+function ensureColumns(sheet) {
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(HEADERS);
+    return;
+  }
+
+  if (sheet.getMaxColumns() < HEADERS.length) {
+    sheet.insertColumnsAfter(sheet.getMaxColumns(), HEADERS.length - sheet.getMaxColumns());
+  }
+
+  const headers = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
+  if (headers[0] !== 'Submitted at' || headers[4] !== 'Email') {
+    throw new Error('The response sheet columns have changed.');
+  }
+
+  if (headers[PHONE_COLUMN - 1] !== 'Phone number') {
+    if (headers[PHONE_COLUMN - 1] !== 'Street address') {
+      throw new Error('The response sheet columns have changed.');
+    }
+
+    // Preserve existing responses while moving the old last column beside email.
+    if (headers[HEADERS.length - 1] === 'Phone number') {
+      sheet.moveColumns(sheet.getRange(1, HEADERS.length, sheet.getMaxRows(), 1), PHONE_COLUMN);
+    } else {
+      sheet.insertColumnBefore(PHONE_COLUMN);
+    }
+  }
+
+  sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
 }
 
 function value(input) {
