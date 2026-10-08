@@ -199,8 +199,7 @@ h2 {
   font-size: 17px;
 }
 
-#access-form button,
-.save-date-link {
+#access-form button {
   display: grid;
   place-items: center;
   width: 100%;
@@ -219,8 +218,7 @@ h2 {
   text-transform: uppercase;
 }
 
-#access-form button:hover,
-.save-date-link:hover {
+#access-form button:hover {
   background: #365c49;
 }
 
@@ -235,8 +233,33 @@ h2 {
 }
 
 .save-date-link {
-  max-width: 340px;
-  margin: 27px auto 0;
+  position: absolute;
+  z-index: 2;
+  top: clamp(18px, 3vw, 34px);
+  left: clamp(18px, 3vw, 34px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  max-width: calc(100% - 36px);
+  padding: 15px 22px;
+  border: 1px solid #fff;
+  background: #fff;
+  color: #263f34;
+  box-shadow: 0 3px 18px #0005;
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: .12em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.save-date-link:hover {
+  background: #f0f1e8;
+  border-color: #f0f1e8;
 }
 
 @media (max-width: 760px) {
