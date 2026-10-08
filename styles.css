@@ -1,0 +1,643 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@600&display=swap');
+
+:root {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  color: #273a33;
+  background: #e9e7df;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.site-shell {
+  width: min(100%, 960px);
+  margin: 0 auto;
+  background: #f8f6ef;
+  box-shadow: 0 6px 35px #2e302016;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: clamp(400px, 75vw, 640px);
+  overflow: hidden;
+  color: #fff;
+  background: #262823;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #11191270 0%, #151b1633 55%, transparent 85%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: 60%;
+  margin-left: 5%;
+  padding: 25px 0;
+  text-align: center;
+  text-shadow: 0 1px 12px #0008;
+}
+
+.hero-eyebrow,
+.hero-date,
+.hero-location {
+  margin: 0;
+  font-size: clamp(13px, 1.8vw, 18px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+}
+
+.hero-eyebrow {
+  margin-bottom: 12px;
+  letter-spacing: .36em;
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(43px, 6.5vw, 78px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.hero-rule {
+  display: block;
+  width: 42px;
+  height: 1px;
+  margin: 28px auto 17px;
+  background: #f7f4e8;
+}
+
+.hero-note {
+  margin: 0;
+  font-size: clamp(17px, 2.3vw, 25px);
+  font-style: italic;
+}
+
+.countdown {
+  padding: 27px 24px 29px;
+  border-bottom: 1px solid #d9ddcf;
+  background: #f0f1e8;
+  text-align: center;
+}
+
+.countdown-eyebrow {
+  margin: 0 0 3px;
+  color: #8b574d;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+}
+
+.countdown h2 {
+  margin: 0 0 16px;
+  color: #345345;
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: .08em;
+}
+
+.countdown-clock {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.countdown-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+.countdown-part+.countdown-part {
+  border-left: 1px solid #cbd6c5;
+}
+
+.countdown-value {
+  color: #263f34;
+  font-size: clamp(38px, 5vw, 57px);
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.countdown-label {
+  margin-top: 5px;
+  color: #667568;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.countdown-finished {
+  margin: 14px 0 0;
+  color: #345345;
+  font-size: 22px;
+  font-style: italic;
+}
+
+.reply-card {
+  padding: 54px clamp(30px, 7%, 74px) 64px;
+}
+
+.form-intro {
+  max-width: 650px;
+  margin: 0 auto 43px;
+  text-align: center;
+}
+
+.form-intro h2 {
+  margin: 0 0 5px;
+  color: #506b5d;
+  font-size: clamp(19px, 2.5vw, 26px);
+  font-weight: 600;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.form-intro p {
+  max-width: 560px;
+  margin: 0 auto;
+  color: #667266;
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.intro-rule {
+  display: block;
+  width: 144px;
+  height: 1px;
+  margin: 22px auto 0;
+  background: #bcc8bc;
+}
+
+.form-field {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.form-field>label,
+.form-field>legend,
+.invitees-label {
+  display: block;
+  width: 100%;
+  margin: 0 0 7px;
+  padding: 0;
+  color: #495d50;
+  font-size: clamp(13px, 1.55vw, 16px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.required {
+  color: #b66c53;
+}
+
+.form-field input[type='text'],
+.form-field input[type='email'],
+.form-field input[type='tel'] {
+  display: block;
+  width: 100%;
+  height: 54px;
+  padding: 8px 14px;
+  border: 1px solid #cbd3c8;
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: #273a33;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.form-field input::placeholder {
+  color: #7b897c;
+  opacity: 1;
+}
+
+.form-field input:focus-visible {
+  border-color: #476653;
+  box-shadow: 0 0 0 3px #dce8d6;
+}
+
+.name-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.name-field {
+  min-width: 0;
+}
+
+.invitees-field {
+  margin-bottom: 25px;
+}
+
+.invitees-label {
+  margin-bottom: 6px;
+}
+
+.optional {
+  color: #748275;
+  font-size: .78em;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#invitees-list:not(:empty) {
+  margin-bottom: 5px;
+  border-top: 1px solid #d5dcd1;
+}
+
+.invitee-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 36px;
+  align-items: end;
+  gap: 8px;
+  padding: 12px 0;
+}
+
+.invitee-entry+.invitee-entry {
+  border-top: 1px solid #d5dcd1;
+}
+
+.invitee-name-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.invitee-entry .form-field>label {
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+
+.invitee-entry .form-field input[type='text'] {
+  height: 48px;
+  padding: 7px 10px;
+  font-size: 20px;
+}
+
+.add-invitee-button,
+.remove-invitee-button {
+  border: 0;
+  background: transparent;
+  color: #557b64;
+  cursor: pointer;
+}
+
+.add-invitee-button {
+  padding: 6px 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  transition: color .2s ease;
+}
+
+.remove-invitee-button {
+  position: relative;
+  width: 36px;
+  min-height: 48px;
+  padding: 0;
+}
+
+.remove-invitee-button::before,
+.remove-invitee-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 1px;
+  background: currentColor;
+}
+
+.remove-invitee-button::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.remove-invitee-button::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.add-invitee-button:hover,
+.remove-invitee-button:hover {
+  color: #263f34;
+}
+
+.add-invitee-button:focus-visible,
+.remove-invitee-button:focus-visible {
+  outline: 2px solid #557b64;
+  outline-offset: 3px;
+}
+
+.email-field,
+.phone-field {
+  margin-bottom: 27px;
+}
+
+.address-field {
+  margin-bottom: 28px;
+}
+
+.address-field>legend {
+  margin-bottom: 18px;
+}
+
+.address-inputs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px 12px;
+}
+
+.address-input {
+  min-width: 0;
+}
+
+.street-input {
+  grid-column: span 3;
+}
+
+.unit-input {
+  grid-column: span 1;
+}
+
+.city-input {
+  grid-column: span 2;
+}
+
+.state-input,
+.zip-input {
+  grid-column: span 1;
+}
+
+.address-input label {
+  display: block;
+  margin-bottom: 6px;
+  color: #68796c;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.form-field .address-input input {
+  height: 52px;
+  font-size: 21px;
+}
+
+.submit-button {
+  border: 0;
+  background: #263f34;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 60px;
+  padding: 15px 23px;
+  text-align: center;
+}
+
+.submit-button>span:first-child {
+  flex: 1;
+}
+
+.submit-button:hover {
+  background: #365c49;
+}
+
+.submit-button:focus-visible {
+  outline: 3px solid #8ba98a;
+  outline-offset: 3px;
+}
+
+.arrow {
+  font-family: Georgia, serif;
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.form-trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-status {
+  margin: 12px 0 0;
+  color: #9c4d36;
+  font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  .hero-image {
+    object-position: right center;
+  }
+
+  .hero-content {
+    width: 62%;
+    margin-left: 3%;
+  }
+
+  .hero h1 {
+    font-size: clamp(35px, 7.4vw, 45px);
+  }
+
+  .reply-card {
+    padding: 44px 7% 52px;
+  }
+}
+
+@media (max-width: 430px) {
+  .countdown {
+    padding: 23px 10px 25px;
+  }
+
+  .countdown h2 {
+    font-size: 22px;
+  }
+
+  .countdown-value {
+    font-size: 35px;
+  }
+
+  .countdown-label {
+    font-size: 10px;
+    letter-spacing: .1em;
+  }
+
+  .hero {
+    align-items: flex-end;
+    height: clamp(420px, 110vw, 490px);
+  }
+
+  .hero-image {
+    object-position: right center;
+  }
+
+  .hero::after {
+    background: linear-gradient(90deg, #111912c2 0%, #1119128c 48%, transparent 85%), linear-gradient(0deg, #11191280, transparent 60%);
+  }
+
+  .hero-content {
+    width: 62%;
+    margin: 0 0 26px 5%;
+    padding: 0;
+    text-align: left;
+  }
+
+  .hero h1 {
+    margin-bottom: 9px;
+    font-size: clamp(30px, 8vw, 36px);
+    line-height: 1.05;
+  }
+
+  .hero-eyebrow,
+  .hero-date,
+  .hero-location {
+    font-size: 10px;
+    letter-spacing: .16em;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 9px;
+    letter-spacing: .2em;
+  }
+
+  .hero-rule {
+    margin: 17px 0 10px;
+  }
+
+  .hero-note {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .form-intro h2 {
+    font-size: 19px;
+  }
+
+  .form-intro p {
+    font-size: 17px;
+  }
+
+  .name-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .invitee-name-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .invitee-entry .form-field>label {
+    font-size: 12px;
+    letter-spacing: .12em;
+    white-space: nowrap;
+  }
+
+  .street-input {
+    grid-column: span 3;
+  }
+
+  .unit-input {
+    grid-column: span 1;
+  }
+
+  .address-field>legend {
+    margin-bottom: 10px;
+  }
+
+  .address-inputs {
+    gap: 10px 12px;
+    align-items: end;
+  }
+
+  .address-input label {
+    margin-bottom: 4px;
+    line-height: 1.1;
+  }
+
+  .unit-input label {
+    font-size: 12px;
+    letter-spacing: .08em;
+  }
+
+  .unit-input .optional {
+    font-size: 10px;
+  }
+
+  .form-field .unit-input input {
+    padding-inline: 8px;
+    font-size: 18px;
+  }
+
+  .city-input {
+    grid-column: 1 / -1;
+  }
+
+  .state-input,
+  .zip-input {
+    grid-column: span 2;
+  }
+
+  .submit-button {
+    font-size: 11px;
+  }
+}
