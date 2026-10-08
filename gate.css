@@ -236,7 +236,7 @@ h2 {
   position: absolute;
   z-index: 2;
   top: clamp(18px, 3vw, 34px);
-  left: clamp(18px, 3vw, 34px);
+  right: clamp(18px, 3vw, 34px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
