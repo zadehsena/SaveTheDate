@@ -5,140 +5,50 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f8f6ef">
-  <title>Neusha &amp; Jacob | Save the Date</title>
-  <meta name="description" content="Save the date for Neusha and Jacob's wedding on October 8, 2027 in Temecula, California. Share your details for a formal invitation.">
-  <meta property="og:title" content="Neusha &amp; Jacob | Save the Date">
+  <title>Neusha &amp; Jacob | Our Wedding</title>
+  <meta name="description" content="The wedding website for Neusha and Jacob. Enter your guest code for updates about our celebration in Temecula, California.">
+  <meta property="og:title" content="Neusha &amp; Jacob | Our Wedding">
   <meta property="og:description" content="October 8, 2027 · Temecula, California">
   <meta property="og:image" content="https://neushaandjacob.com/assets/save-the-date-hero-color.jpg">
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <link rel="canonical" href="https://neushaandjacob.com/">
+  <link rel="stylesheet" href="gate.css">
+  <script src="gate.js" defer></script>
 </head>
 
 <body>
-  <div class="site-shell">
-    <header class="hero">
-      <img class="hero-image" src="assets/save-the-date-hero-color.jpg" alt="Neusha and Jacob embracing outdoors"
-        fetchpriority="high">
-      <div class="hero-content">
-        <p class="hero-eyebrow">Save the date</p>
-        <h1>Neusha &amp; Jacob</h1>
-        <p class="hero-date">October 8, 2027</p>
-        <p class="hero-location">Temecula, California</p>
-        <span class="hero-rule" aria-hidden="true"></span>
-        <p class="hero-note">Formal invitation to follow</p>
+  <div class="entry-layout">
+    <div class="photo-panel">
+      <img src="assets/save-the-date-hero-color.jpg" alt="Neusha and Jacob together outdoors" fetchpriority="high">
+      <span class="photo-caption">October 8, 2027 <span aria-hidden="true">·</span> Temecula, California</span>
+    </div>
+
+    <main class="gate-panel">
+      <div class="gate-content">
+        <p class="eyebrow">The wedding of</p>
+        <h1>Neusha <span>&amp;</span> Jacob</h1>
+        <span class="divider" aria-hidden="true"></span>
+
+        <section id="gate-locked" aria-labelledby="gate-title">
+          <h2 id="gate-title">Welcome, loved ones.</h2>
+          <p class="intro">Enter your guest code to visit our wedding website.</p>
+          <form id="access-form" action="#" method="post">
+            <label for="guest-code">Guest access code</label>
+            <input id="guest-code" name="guestCode" type="password" inputmode="numeric" autocomplete="off"
+              maxlength="4" required>
+            <p id="code-error" class="code-error" role="alert" hidden>That code isn't quite right. Please try again.</p>
+            <button type="submit">Enter</button>
+          </form>
+        </section>
+
+        <section id="gate-unlocked" aria-labelledby="welcome-title" hidden>
+          <p class="eyebrow unlocked-eyebrow">You're in</p>
+          <h2 id="welcome-title" tabindex="-1">We're so glad you're here.</h2>
+          <p class="intro">Our wedding website is coming soon. We can't wait to share more of the day with you.</p>
+          <a class="save-date-link" href="savethedate/">View our save the date</a>
+        </section>
+
+        <p class="signoff">We can't wait to celebrate with you</p>
       </div>
-    </header>
-
-    <section class="countdown" aria-labelledby="countdown-title">
-      <h2 id="countdown-title">Until our wedding day</h2>
-      <div class="countdown-clock" role="timer" aria-label="Time until October 8, 2027 in Temecula">
-        <div class="countdown-part"><span id="countdown-days" class="countdown-value">—</span><span
-            class="countdown-label">Days</span></div>
-        <div class="countdown-part"><span id="countdown-hours" class="countdown-value">—</span><span
-            class="countdown-label">Hours</span></div>
-        <div class="countdown-part"><span id="countdown-minutes" class="countdown-value">—</span><span
-            class="countdown-label">Minutes</span></div>
-        <div class="countdown-part"><span id="countdown-seconds" class="countdown-value">—</span><span
-            class="countdown-label">Seconds</span></div>
-      </div>
-      <p id="countdown-finished" class="countdown-finished" hidden>Today is the day!</p>
-    </section>
-
-    <main class="reply-card">
-      <div class="form-intro">
-        <h2>Kindly share your details</h2>
-        <p>Please provide your information so we can send your formal invitation and keep you updated as our wedding day
-          approaches.</p>
-        <span class="intro-rule" aria-hidden="true"></span>
-      </div>
-
-      <form id="reply-form"
-        action="https://script.google.com/macros/s/AKfycbzn9w71gZw46baMnlNlrCuy83piSMSBPaMJ6AhQome-Yt2a763Q0mrGPFCvcsf-FSKVHQ/exec"
-        method="post" accept-charset="UTF-8">
-        <div class="name-fields">
-          <div class="form-field name-field">
-            <label for="first-name">First name <span class="required" aria-hidden="true">*</span></label>
-            <input id="first-name" name="firstName" type="text" autocomplete="given-name" placeholder="First name"
-              required>
-          </div>
-          <div class="form-field name-field">
-            <label for="last-name">Last name <span class="required" aria-hidden="true">*</span></label>
-            <input id="last-name" name="lastName" type="text" autocomplete="family-name" placeholder="Last name"
-              required>
-          </div>
-        </div>
-
-        <div class="form-field invitees-field">
-          <p class="invitees-label">Additional invitees <span class="optional">(optional)</span></p>
-          <div id="invitees-list"></div>
-          <button type="button" class="add-invitee-button" id="add-invitee">+ Add invitee</button>
-        </div>
-
-        <template id="invitee-template">
-          <div class="invitee-entry" role="group">
-            <div class="invitee-name-fields">
-              <div class="form-field name-field">
-                <label>First name <span class="required" aria-hidden="true">*</span></label>
-                <input class="invitee-first-name" name="inviteeFirstName" type="text" autocomplete="off" required>
-              </div>
-              <div class="form-field name-field">
-                <label>Last name <span class="required" aria-hidden="true">*</span></label>
-                <input class="invitee-last-name" name="inviteeLastName" type="text" autocomplete="off" required>
-              </div>
-            </div>
-            <button type="button" class="remove-invitee-button" aria-label="Remove additional invitee"></button>
-          </div>
-        </template>
-
-        <div class="contact-fields">
-          <div class="form-field email-field">
-            <label for="guest-email">Email address <span class="required" aria-hidden="true">*</span></label>
-            <input id="guest-email" name="email" type="email" autocomplete="email" placeholder="Email address"
-              required>
-          </div>
-
-          <div class="form-field phone-field">
-            <label for="guest-phone">Phone number <span class="required" aria-hidden="true">*</span></label>
-            <input id="guest-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel"
-              placeholder="(555) 123-4567" maxlength="30" required>
-          </div>
-        </div>
-
-      <fieldset class="form-field address-field">
-          <legend>Mailing address <span class="required" aria-hidden="true">*</span></legend>
-          <div class="address-inputs">
-            <div class="address-input street-input">
-              <label for="street-address">Street address</label>
-              <input id="street-address" name="street" type="text" autocomplete="address-line1" required>
-            </div>
-            <div class="address-input unit-input">
-              <label for="unit-number">Unit <span class="optional">(optional)</span></label>
-              <input id="unit-number" name="unit" type="text" autocomplete="address-line2">
-            </div>
-            <div class="address-input city-input">
-              <label for="city">City</label>
-              <input id="city" name="city" type="text" autocomplete="address-level2" required>
-            </div>
-            <div class="address-input state-input">
-              <label for="state">State</label>
-              <input id="state" name="state" type="text" autocomplete="address-level1" required>
-            </div>
-            <div class="address-input zip-input">
-              <label for="zip-code">ZIP code</label>
-              <input id="zip-code" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" required>
-            </div>
-          </div>
-        </fieldset>
-
-        <input id="submission-id" name="submissionId" type="hidden">
-        <div class="form-trap" aria-hidden="true">
-          <label for="website">Leave this field empty</label>
-          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
-        </div>
-
-        <button class="submit-button" type="submit">Send my details</button>
-        <p id="form-status" class="form-status" role="alert" hidden></p>
-      </form>
     </main>
   </div>
 </body>
