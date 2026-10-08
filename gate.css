@@ -47,7 +47,7 @@ input {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 57% center;
+  object-position: right center;
 }
 
 .photo-panel::after {
