@@ -1,23 +1,17 @@
 const form = document.querySelector('#reply-form');
 const inviteesList = document.querySelector('#invitees-list');
 const phoneInput = document.querySelector('#guest-phone');
+const zipInput = document.querySelector('#zip-code');
+const stateInput = document.querySelector('#state');
 document.querySelector('#submission-id').value = globalThis.crypto?.randomUUID?.()
   || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 let nextInviteeId = 0;
 
 function formatPhoneNumber(value) {
-  const digits = value.replace(/\D/g, '');
-  const hasUsPrefix = value.trimStart().startsWith('+1') || (digits.length === 11 && digits.startsWith('1'));
-
-  // Preserve international numbers that do not use the US country code.
-  if ((value.trimStart().startsWith('+') && !hasUsPrefix) || digits.length > 11 ||
-      (digits.length === 11 && !hasUsPrefix)) return value;
-
-  const national = hasUsPrefix ? digits.slice(1) : digits;
-  const prefix = hasUsPrefix ? '+1 ' : '';
-  if (national.length <= 3) return prefix + national;
-  if (national.length <= 6) return `${prefix}(${national.slice(0, 3)}) ${national.slice(3)}`;
-  return `${prefix}(${national.slice(0, 3)}) ${national.slice(3, 6)}-${national.slice(6)}`;
+  const digits = value.replace(/\D/g, '').slice(0, 10);
+  if (digits.length <= 3) return digits;
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
 }
 
 phoneInput.addEventListener('input', () => {
@@ -33,8 +27,17 @@ phoneInput.addEventListener('input', () => {
     if (/\d/.test(formatted[caret])) digitsSeen += 1;
     caret += 1;
   }
-  if (digitsBeforeCaret === 0 && formatted.startsWith('+1 ')) caret = 3;
   phoneInput.setSelectionRange(caret, caret);
+});
+
+zipInput.addEventListener('input', () => {
+  const cleaned = zipInput.value.replace(/\D/g, '').slice(0, 5);
+  if (zipInput.value !== cleaned) zipInput.value = cleaned;
+});
+
+stateInput.addEventListener('input', () => {
+  const cleaned = stateInput.value.replace(/[^a-z]/gi, '').slice(0, 2).toUpperCase();
+  if (stateInput.value !== cleaned) stateInput.value = cleaned;
 });
 
 // Midnight at the start of October 8 in Temecula (Pacific Daylight Time).
