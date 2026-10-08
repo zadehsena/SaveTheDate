@@ -76,6 +76,10 @@ input {
   padding: 0 .35em;
 }
 
+.mobile-hero-content {
+  display: none;
+}
+
 .gate-panel {
   display: grid;
   grid-column: 1;
@@ -242,24 +246,67 @@ h2 {
   }
 
   .photo-panel {
+    display: flex;
+    align-items: flex-end;
     min-height: 0;
-    height: min(54vw, 350px);
+    height: clamp(420px, 110vw, 640px);
   }
 
   .photo-panel img {
-    object-position: 58% 45%;
+    object-position: right center;
+  }
+
+  .photo-panel::after {
+    inset: 0;
+    background: linear-gradient(90deg, #111912c2 0%, #1119128c 48%, transparent 85%), linear-gradient(0deg, #11191280, transparent 60%);
   }
 
   .photo-caption {
-    right: 20px;
-    bottom: 15px;
-    left: 20px;
-    font-size: 11px;
+    display: none;
+  }
+
+  .mobile-hero-content {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: 62%;
+    margin: 0 0 28px 5%;
+    color: #fff;
+    text-shadow: 0 1px 12px #0008;
+  }
+
+  .mobile-hero-content h1 {
+    margin: 0 0 9px;
+    color: inherit;
+    font-size: clamp(30px, 8vw, 45px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+  }
+
+  .mobile-hero-eyebrow,
+  .mobile-hero-date,
+  .mobile-hero-location {
+    margin: 0;
+    font-size: clamp(10px, 2.3vw, 14px);
+    font-weight: 600;
+    line-height: 1.4;
     letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .mobile-hero-eyebrow {
+    margin-bottom: 9px;
+    letter-spacing: .2em;
+  }
+
+  .gate-heading {
+    display: none;
   }
 
   .gate-panel {
-    min-height: calc(100vh - min(54vw, 350px));
+    min-height: 0;
     padding: 43px 8% 40px;
   }
 
